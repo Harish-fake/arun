@@ -1,0 +1,18 @@
+<h2>Transactions</h2>
+<ul id="txList"></ul>
+<script>
+const params = new URLSearchParams(window.location.search);
+const userId = params.get('userId');
+
+async function loadTransactions() {
+    const res = await fetch(`http://localhost:3000/api/transactions/${userId}`);
+    const txs = await res.json();
+    const list = document.getElementById('txList');
+    txs.forEach(tx => {
+        const li = document.createElement('li');
+        li.textContent = `${tx.amount} - ${tx.description}`;
+        list.appendChild(li);
+    });
+}
+loadTransactions();
+</script>

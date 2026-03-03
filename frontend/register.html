@@ -1,0 +1,21 @@
+<h2>Register</h2>
+<form id="registerForm">
+    Username: <input name="username"><br>
+    Password: <input name="password" type="password"><br>
+    <button type="submit">Register</button>
+</form>
+<script>
+document.getElementById('registerForm').addEventListener('submit', async e => {
+    e.preventDefault();
+    const form = e.target;
+    await fetch('http://localhost:3000/api/users/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+            username: form.username.value,
+            password: form.password.value
+        })
+    });
+    alert('Registered!');
+});
+</script>
